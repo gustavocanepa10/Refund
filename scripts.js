@@ -7,13 +7,20 @@ const amount = document.getElementById("amount")
 amount.addEventListener("input", (event) => {
     
     // Obtém o valor atual do input e remove os caracteres não númericos.
-    let value = amount.value.replace(/\D+/g,"" )
+    value = amount.value.replace(/\D+/g, "")
+    // Aqui o value está em string, é necessário passa-lo para numero.
+    
 
-    // Transformar o valor em centavos (exemplo 150/100 = 1.5)
+    /* Transforma o valor pra númerico e em seguida para centavos 
+    (exemplo 150/100 = 1.5)*/
     value = Number(value) / 100
+  
+    
 
     // Atualiza o valor do input.
     amount.value = formatCurrencyBRL(value)
+    
+    
     
 })
 
@@ -21,12 +28,14 @@ amount.addEventListener("input", (event) => {
 
 
 function formatCurrencyBRL (value) {
-    // Formata o valor para a moeda brasileira (BRL).
-    value = value.toLocaleString("pt-BR", {
+    // Formata o valor no padrão BRL (Real Brasileiro).
+    value = value.toLocaleSting("pt-BR", {
         style: "currency",
-        currency: "BRL",
+        currency: "BRL,"
+    
     })
-
+    
+    // Aqui eu envio o valor já formatado para dentro do amount.value
     return value
 
 
