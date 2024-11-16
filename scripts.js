@@ -57,8 +57,14 @@ form.addEventListener("submit", (event) => {
     
 
 
-    console.log(newExpense)
+    // console.log(newExpense)
     // Chama a função que irá adicionar o item na lista.
+    /*
+    No código, o parâmetro newExpense da função expenseAdd serve para receber o objeto da nova despesa que foi criado no evento de submit do formulário. 
+    Esse objeto contém todas as informações da despesa que o usuário inseriu no formulário,
+    O papel do newExpense na função expenseAdd é:
+    Transportar os dados da despesa para dentro da função.
+    Permitir que a função use esses dados para criar e adicionar um novo item na lista de despesas no DOM.*/
     expenseAdd(newExpense)  // Adiciona a nova despesa chamando a função
 
    
@@ -70,46 +76,106 @@ form.addEventListener("submit", (event) => {
 
 function expenseAdd(newExpense) {
 
-
 try {
         
     // Criando elemento para adicionar na lista.
     const expenseItem = document.createElement("li")
     expenseItem.classList.add("expense")
+
+    
+
+    
     
     // Criando o icone da categoria.
-    const iconExpense = document.createElement("img")
-    iconExpense.setAttribute("src", `img/${newExpense.category_id}.svg`)
-    iconExpense.setAttribute("alt", newExpense.category_name)
-
-    // Adiciona as informações no item.
-    expenseItem.append(iconExpense)
+    const expenseIcon = document.createElement("img")
+    expenseIcon.setAttribute("src", `img/${newExpense.category_id}.svg`)
+    // Icone adicionado
+    
+    
     
 
-    // Adiciona o item na lista.
+    // Criando a div da despesa.
+    const expenseDiv = document.createElement("div")
+    expenseDiv.classList.add("expense-info")
+    
+
+    
+    
+    
+
+    // Criando o strong que contém a categoria da despesa.
+    const expenseContent = document.createElement("strong")
+    expenseContent.textContent = newExpense.expense_name
+    expenseContent.classList.add("expense-info")
+    expenseDiv.append(expenseContent)
+    
+
+
+
+    // Criando o span que contém as informações da despesa.
+    const expenseCategory = document.createElement("span")
+    expenseCategory.textContent = newExpense.category_name
+    expenseCategory.classList.add("expense-info")
+    expenseDiv.append(expenseCategory)
+
+    
+    
+
+
+
+    // Cria o amout.
+    const expenseAmount = document.createElement("span")
+    expenseAmount.classList.add("expense-amount")
+    expenseAmount.innerHTML = `<small>R$</small>${newExpense.amount_value.
+    toUpperCase().replace("R$","")}`
+
+
+    // Cria o icone de remover.
+    const removeIcon= document.createElement("img")
+    removeIcon.classList.add("remove-icon")
+    removeIcon.setAttribute("src", "img/remove.svg")
+    removeIcon.setAttribute("alt","remover")
+    
+    
+    expenseItem.append(expenseIcon,expenseDiv,expenseAmount,removeIcon)
+    
+
+    
+
+    // Adicionando os itens na lista
     expenseList.append(expenseItem)
+    console.log(expenseList)
+    
+    
+
+    
+
+    
+
+    
+
+    
+    
 
     
     // Criando a info da despesa
-    const expenseInfo = document.createElement("div")
-    expenseInfo.classList.add("expense-info")
+   
    
 
 
     // Criando a categoria da despesa e adicionando
-    const categoryInfo = document.createElement("strong")
-    categoryInfo.classList.add("expense-info")
-    categoryInfo.textContent = newExpense.expense_name
-    expenseInfo.append(categoryInfo)
+    
+    // Adiciono o nome da categoria dentro da div
+    
     
     
 
     // Criando o conteúdo da despesa
-    const expenseContent = document.createElement("span")
-    expenseContent.classList.add("expense-info")
-    expenseContent.textContent = newExpense.category_name
-    expenseInfo.append(expenseContent)
-    expenseItem.append(expenseInfo)
+    
+    // Adiciono o conteúdo (span) da despesa dentro da div (expenseInfo)
+    
+    // Adiciono a div dentro da nova despesa(li)
+    
 
     
 
