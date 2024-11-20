@@ -8,23 +8,29 @@ const category = document.getElementById("category")
 
 // Seleciona os elemento da lista.
 const expenseList = document.querySelector("ul")
+const expensesQuantity = document.querySelector("aside header p span")
 
 
 // Captura o evento de input para formatar o valor.
 amount.addEventListener("input", (event) => {
+    event.preventDefault()
 
     // Retiro as letras do input.
-    value = amount.value.replace(/\D+/g, "")
+    value = amount.value.replace(/\D+/g, "") 
     
     // Transformo o value em Number.
     value = Number(value) / 100
     
-    // Relaciono o input com a função de formatação.
+    // Atualizo o valoro do input
+    // Aqui o valor é retornado e com isso o amount.value já é atualizado formatado.
     amount.value = formatCurrencyBRL(value)
 
 
 
 })
+
+
+
 
 // Função que formata para BRL (moeda brasileira).
 function formatCurrencyBRL (value) {
@@ -73,7 +79,7 @@ form.addEventListener("submit", (event) => {
 })
 
 
-
+// Adiciona um novo item na lista.
 function expenseAdd(newExpense) {
 
 try {
@@ -123,7 +129,7 @@ try {
 
 
 
-    // Cria o amout.
+    // Cria o valor da despesa.
     const expenseAmount = document.createElement("span")
     expenseAmount.classList.add("expense-amount")
     expenseAmount.innerHTML = `<small>R$</small>${newExpense.amount_value.
@@ -131,10 +137,10 @@ try {
 
 
     // Cria o icone de remover.
-    const removeIcon= document.createElement("img")
+    const removeIcon = document.createElement("img")
     removeIcon.classList.add("remove-icon")
     removeIcon.setAttribute("src", "img/remove.svg")
-    removeIcon.setAttribute("alt","remover")
+    removeIcon.setAttribute("alt", "remover")
     
     
     expenseItem.append(expenseIcon,expenseDiv,expenseAmount,removeIcon)
@@ -145,6 +151,9 @@ try {
     // Adicionando os itens na lista
     expenseList.append(expenseItem)
     console.log(expenseList)
+
+    // Atualiza os totais
+    updateTotals()
     
     
 
@@ -193,6 +202,32 @@ try {
 
 
 }
+
+
+// Atualiza os totais
+function updateTotals() {
+    try {
+        // Recupera todos os itens (li) da lista (ul)
+        const items = expenseList.children // children pega os filhos da lista
+        console.log(items) // aqui aparece os filhos
+        
+    
+    
+    
+    
+    // Atualiza a quantidade de itens da lista.
+    expensesQuantity.textContent = `${items.length} ${items.length > 1 ? "despesas" : "despesa"}`
+    
+    } catch (error) {
+        console.log(error)
+        alert("Não foi possivel os totais")
+        
+    }
+}
+
+
+
+
 
 
 
