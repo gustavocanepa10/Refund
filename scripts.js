@@ -21,7 +21,7 @@ amount.addEventListener("input", (event) => {
     // Transformo o value em Number.
     value = Number(value) / 100
     
-    // Atualizo o valoro do input
+    // Atualizo o valor do input
     // Aqui o valor é retornado e com isso o amount.value já é atualizado formatado.
     amount.value = formatCurrencyBRL(value)
 
@@ -40,6 +40,7 @@ function formatCurrencyBRL (value) {
     })
     
     // Retorna o value formatado para dentro do input.
+    // Retorna para uso fora da função.
     return value
 
 }
@@ -63,16 +64,12 @@ form.addEventListener("submit", (event) => {
     
 
 
-    // console.log(newExpense)
-    // Chama a função que irá adicionar o item na lista.
-    /*
-    No código, o parâmetro newExpense da função expenseAdd serve para receber o objeto da nova despesa que foi criado no evento de submit do formulário. 
-    Esse objeto contém todas as informações da despesa que o usuário inseriu no formulário,
-    O papel do newExpense na função expenseAdd é:
-    Transportar os dados da despesa para dentro da função.
-    Permitir que a função use esses dados para criar e adicionar um novo item na lista de despesas no DOM.*/
-    expenseAdd(newExpense)  // Adiciona a nova despesa chamando a função
-
+   
+    
+    expenseAdd(newExpense);
+    // Aqui eu passo o "newExpense", que é um ARGUMENTO, para o PARÂMETRO definido na função "expenseAdd".
+    
+    
    
     
 
@@ -216,7 +213,26 @@ function updateTotals() {
     
     
     // Atualiza a quantidade de itens da lista.
-    expensesQuantity.textContent = `${items.length} ${items.length > 1 ? "despesas" : "despesa"}`
+    expensesQuantity.textContent = `${items.length} ${items.length >  1
+        ? "despesas" : "despesa"}`
+
+
+
+
+    // Variavel para incrementar o total.
+    let total = 0
+
+    // Percorre cada item (li) da lista (ul).
+    for (let item = 0 ; item < items.length ; item++) {
+        const itemAmount = items[item].querySelector(".expense-amount")
+
+
+        console.log(itemAmount)
+
+    }
+
+
+    
     
     } catch (error) {
         console.log(error)
