@@ -9,6 +9,7 @@ const category = document.getElementById("category")
 // Seleciona os elemento da lista.
 const expenseList = document.querySelector("ul")
 const expensesQuantity = document.querySelector("aside header p span")
+const expensesTotal = document.querySelector("aside header h2")
 
 
 // Captura o evento de input para formatar o valor.
@@ -149,43 +150,20 @@ try {
     expenseList.append(expenseItem)
     console.log(expenseList)
 
+
+    removeIcon.addEventListener("click", (event) => {
+        event.preventDefault()
+        expenseItem.remove()
+
+    })
+
     // Atualiza os totais
     updateTotals()
-    
-    
 
-    
-
-    
-
-    
 
     
     
-
-    
-    // Criando a info da despesa
    
-   
-
-
-    // Criando a categoria da despesa e adicionando
-    
-    // Adiciono o nome da categoria dentro da div
-    
-    
-    
-
-    // Criando o conteúdo da despesa
-    
-    // Adiciono o conteúdo (span) da despesa dentro da div (expenseInfo)
-    
-    // Adiciono a div dentro da nova despesa(li)
-    
-
-    
-
-
 } catch (error) {
         alert("Não foi possivel atualizar a lista")
         console.log(error)
@@ -205,14 +183,12 @@ try {
 function updateTotals() {
     try {
         // Recupera todos os itens (li) da lista (ul)
-        const items = expenseList.children // children pega os filhos da lista
-        console.log(items) // aqui aparece os filhos
-        
-    
-    
-    
+        const items = expenseList.children // children pega os filhos da lista.
+        console.log(items) // aqui aparece os filhos.
     
     // Atualiza a quantidade de itens da lista.
+    // IF ternário.
+    // Se a quantidade for maior que 1, vai aparecer "despesas", se não aparece "despesa"
     expensesQuantity.textContent = `${items.length} ${items.length >  1
         ? "despesas" : "despesa"}`
 
@@ -221,15 +197,37 @@ function updateTotals() {
 
     // Variavel para incrementar o total.
     let total = 0
+    // Percorre cada item (li) da lista (ul), pegando o valor da despesa e acrescentando dentro do total.
+    // O loop vai continuar iterando enquanto a contagem (item) não passar da quantidade de itens na lista.
 
-    // Percorre cada item (li) da lista (ul).
     for (let item = 0 ; item < items.length ; item++) {
+        // Acesso dentro de items, o item atual e pego o valor dele.
         const itemAmount = items[item].querySelector(".expense-amount")
+        
 
+        // Remover caracteres não numéricos e substitui a virgula pelo ponto
+        let value = itemAmount.textContent.replace(/[^\d]/g, "").replace(",", ".")
 
-        console.log(itemAmount)
+        // Converte o valor para float.
+        value = parseFloat(value)
+
+        // Verifica se é um numero valido.
+
+        if (isNaN (value)) {
+            return alert("O valor não é válido")
+
+        }
+
+        // Incrementa o valor total.
+        total += Number(value)
+
 
     }
+
+
+    expensesTotal.textContent = total
+    
+    
 
 
     
