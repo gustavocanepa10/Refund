@@ -255,7 +255,11 @@ function updateTotals() {
         alert("Não foi possivel atualizar os totais")
         
     }
+
+    
 }
+
+
 
 function formClear() {
     expense.value = ""
@@ -265,14 +269,26 @@ function formClear() {
 
 
 // Evento que captura o clique nos elementos da lista.
-removeIcon.addEventListener("click", (event) => {
+expenseList.addEventListener("click", function(event) {
 
+    if (event.target.classList.contains("remove-icon")) {
     // Obtém a li pai do elemento clicado
     const item = event.target.closest(".expense")
     item.remove()
 
+    
+
+    }
+
+    updateTotals()
+
+    
+
 
 })
+
+
+
 
 
 
